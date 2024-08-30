@@ -42,8 +42,8 @@ services:
 
 Clone the Repository: Clone this repository to your local machine.
 
-### Configure the Runner:
+**Configure the Runner**:
 - Replace YOUR_REPO_LINK with your GitHub repository URL.
 - Replace YOUR_ACCESS_TOKEN with your GitHub access token.
-### Deploy the Stack:
+**Deploy the Stack**:
 - Run docker-compose up -d to start the GitHub Actions runner.
