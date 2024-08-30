@@ -1,0 +1,6 @@
+@CICD_DockerRunner.API_HostAddress = http://localhost:5001
+
+GET {{CICD_DockerRunner.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
