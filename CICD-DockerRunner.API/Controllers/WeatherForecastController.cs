@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CICD_DockerRunner.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -31,7 +31,7 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast1")]
-    public IEnumerable<WeatherForecast> Get()
+    public IEnumerable<WeatherForecast> Get1()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
