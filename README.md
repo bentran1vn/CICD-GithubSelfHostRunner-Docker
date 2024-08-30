@@ -1,4 +1,18 @@
-```
+# CI/CD with Docker
+
+## Overview
+
+This project demonstrates how to set up Continuous Integration and Continuous Deployment (CI/CD) using Docker. The setup includes:
+
+- **Creating a Dockerfile**: Define the image with all necessary configurations and dependencies.
+- **Setting Up a Self-Hosted Runner**: Configure a GitHub Actions self-hosted runner for executing workflows.
+- **Creating a GitHub Workflow**: Develop workflows to automate build, test, and deployment processes.
+
+## Docker Compose Configuration
+
+Below is the configuration for setting up a self-hosted GitHub Actions runner using Docker Compose:
+
+```yaml
 version: "3.7"
 
 services:
@@ -23,5 +37,3 @@ services:
         reservations:
           cpus: '0.2'
           memory: 256M
-
-```
