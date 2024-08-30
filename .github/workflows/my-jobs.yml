@@ -1,0 +1,17 @@
+name: My Jobs
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build_image:
+    runs-on: [self-hosted, some-label]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Docker image
+        run: docker build -t myapp .
+      - name: Run Docker container
+        run: docker run -d -p 4000:8080 --name myappContainer myapp
