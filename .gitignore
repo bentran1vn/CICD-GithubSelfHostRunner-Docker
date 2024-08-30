@@ -476,3 +476,5 @@ Temporary Items
 # Android studio 3.1+ serialized cache file
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,rider,intellij,aspnetcore,dotnetcore
+
+docker-compose.yml
