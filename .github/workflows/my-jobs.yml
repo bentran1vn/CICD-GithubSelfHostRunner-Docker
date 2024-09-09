@@ -10,11 +10,15 @@ jobs:
       - uses: actions/checkout@v3
       - name: Build Docker image
         run: docker build -t myapp:latest -f CICD-DockerRunner.API/Dockerfile .
-      - name: Check if container exists and stop/remove if necessary
+      - name: Check if container exists, stop/remove if necessary, then run
         run: |
           if docker ps -a | grep myappContainer | grep -q "Exited"; then
+            echo "Container exists. Stopping and removing..."
             docker stop myappContainer || echo "Container stopping failed"
             docker rm myappContainer || echo "Container removal failed"
+            echo "Running new container..."
+            docker run -d -p 4000:8080 --name myappContainer myapp:latest
+          else
+            echo "Container does not exist. Running for the first time..."
+            docker run -d -p 4000:8080 --name myappContainer myapp:latest
           fi
-      - name: Run Docker container
-        run: docker run -d -p 4000:8080 --name myappContainer myapp:latest
