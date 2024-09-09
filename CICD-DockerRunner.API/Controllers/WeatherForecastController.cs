@@ -89,4 +89,16 @@ public class WeatherForecastController : ControllerBase
             })
             .ToArray();
     }
+    
+    [HttpGet(Name = "GetWeatherForecast6")]
+    public IEnumerable<WeatherForecast> Get6()
+    {
+        return Enumerable.Range(1, 4).Select(index => new WeatherForecast
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
+            })
+            .ToArray();
+    }
 }
