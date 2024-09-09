@@ -8,14 +8,13 @@ jobs:
     runs-on: [self-hosted, some-label]
     env:
       CONTAINER_NAME: myappContainer
-      CODE_VERSION: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build -t myapp:${{ github.sha }} -f CICD-DockerRunner.API/Dockerfile .
+        run: docker build -t myapp:latest -f CICD-DockerRunner.API/Dockerfile .
       - name: Manage Docker Container and Build
         run: |
-          CNAME=${{ env.CONTAINER_NAME }}-${{ env.CODE_VERSION }}
+          CNAME=${{ env.CONTAINER_NAME }}
 
           # Check if the container exists
           if [ "$(docker ps -aq -f name=$CNAME)" ]; then
@@ -35,4 +34,4 @@ jobs:
           fi
           # Run new container
           echo ":: Running new container - $CNAME"
-          docker run -d -p 4000:8080 --name $CNAME myapp:${{ github.sha }}
+          docker run -d -p 4000:8080 --name $CNAME myapp:latest
