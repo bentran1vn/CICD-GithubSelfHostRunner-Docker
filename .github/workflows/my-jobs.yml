@@ -1,26 +1,20 @@
 name: My Jobs
-
 on:
   push:
     branches:
       - main
-
 jobs:
-
   build_image:
     runs-on: [ self-hosted, some-label ]
     steps:
       - uses: actions/checkout@v3
       - name: Build Docker image
-        run: docker build -t myapp:lastest -f CICD-DockerRunner.API/Dockerfile .
-      - name: Check if container exists
-        run: docker ps -a | grep myappContainer | grep -q "Exited" > /dev/null
-        if: ${{ steps.Check_if_container_exists.outputs.container_exists == 'true' }}
-        uses: actions/shell@v3
-        with:
-          - name: Stop the Container
-            run: docker stop myappContainer || echo "Container stopping failed"
-          - name: Remove the Container
-            run: docker rm myappContainer || echo "Container removal failed"
+        run: docker build -t myapp:latest -f CICD-DockerRunner.API/Dockerfile .
+      - name: Check if container exists and stop/remove if necessary
+        run: |
+          if docker ps -a | grep myappContainer | grep -q "Exited"; then
+            docker stop myappContainer || echo "Container stopping failed"
+            docker rm myappContainer || echo "Container removal failed"
+          fi
       - name: Run Docker container
-        run: docker run -d -p 4000:8080 --name myappContainer myapp:lastest
+        run: docker run -d -p 4000:8080 --name myappContainer myapp:latest
