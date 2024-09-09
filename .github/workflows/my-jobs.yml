@@ -14,7 +14,7 @@ jobs:
       - name: Build Docker Image
         run: docker build -t myapp:${{ github.sha }} -f CICD-DockerRunner.API/Dockerfile .
       - name: Manage Docker Container and Build
-        run: 
+        run: |
           CNAME=${{ env.CONTAINER_NAME }}-${{ env.CODE_VERSION }}
 
           # Check if the container exists
